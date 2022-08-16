@@ -1,6 +1,6 @@
 class Alumno {
     constructor (object){
-        this.name = object.nombre;
+        this.nombre = object.nombre;
         this.email = object.email;
         this.password = object.password;
     }
@@ -80,9 +80,13 @@ class Alumno {
 
 
 function datosGuardados(){
-    const datos = {name:nombreI, email:emailI, password:passwordI};
+    let nombreI = miFormulario.children [1].value;
+    let emailI = miFormulario.children [3].value;
+    let passwordI = miFormulario.children [5].value;
+    const datos = {nombre:nombreI, email:emailI, password:passwordI};
     console.log(datos);
     guardarDatosLS(datos)
+
 }
 
 
@@ -91,8 +95,10 @@ function datosGuardados(){
    console.log ("Datos guardados en Local Storage!");
  }
  function cargarDatosLS (){
-    return JSON.parse(localStorage.getItem("datos"))
+    return JSON.parse(localStorage.getItem("datosContacto"))
  }
+ miFormulario.addEventListener ("submit", datosGuardados);
+
 
  
 
