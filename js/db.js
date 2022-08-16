@@ -6,7 +6,7 @@ const materias = [
 {id: 4, nombre: "Geografia", Puntos:3000},
 {id: 5, nombre: "Fisica", Puntos:3500},
 {id: 6, nombre: "Quimica", Puntos:4000},
-{id: 7, nombre: "Educacio Fisica", Puntos:900},
+{id: 7, nombre: "Educacion Fisica", Puntos:900},
 {id: 8, nombre: "Filosofia", Puntos:900}
 ];
 
