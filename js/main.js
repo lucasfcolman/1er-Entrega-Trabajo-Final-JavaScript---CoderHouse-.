@@ -7,8 +7,7 @@ let carrera = document.getElementById ("Carrera")
 
  console.log (materias);
  let map = materias.map (x =>{
-    return (`
-             <h2>${x.nombre} </h2>
+    return (`<h2>${x.nombre} </h2>
              <div>Puntos: ${x.Puntos} </div>`)
  })
  let mapaMaterias = document.getElementById("course");
