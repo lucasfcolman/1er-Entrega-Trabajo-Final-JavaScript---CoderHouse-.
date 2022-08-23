@@ -99,6 +99,25 @@ function datosGuardados(){
  }
  miFormulario.addEventListener ("submit", datosGuardados);
 
+ btnMostrar.addEventListener('click', () => {
+   
+    Swal.fire({
+        title: 'Está seguro de  que es el mail?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, seguro',
+        cancelButtonText: 'No, no quiero'
+    }).then((result) => {
+ 
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Guardado!',
+                icon: 'success',
+                text: 'El archivo ha sido guardado'
+            })
+        }
+    })
+})
 
  
 
