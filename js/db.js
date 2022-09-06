@@ -10,7 +10,14 @@ const materias = [
 {id: 8, nombre: "Filosofia", Puntos:900}
 ];
 
-class course{
+function guardadoDeMateriasLS(materias){
+    localStorage.setItem ("materias", JSON.stringify(materias));
+}
+function cargarMateriasLS (){
+    return JSON.parse(localStorage.getItem ("materias")) || [];
+}
+
+ class course{
     constructor(objeto) {
     this.id = objeto.id;
     this.nombre = objeto.nombre;
@@ -97,4 +104,4 @@ alert (salida);
 }
 
 agregarMaterias();
-mostrarMateriasCarrito();
+mostrarMateriasCarrito(); 

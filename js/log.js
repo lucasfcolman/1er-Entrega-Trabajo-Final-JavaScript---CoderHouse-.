@@ -11,9 +11,9 @@ class Alumno {
    let inputNombre = document.getElementById("iNombre");
    let btnMostrar  = document.getElementById("btnMostrar");
 
-   let nombreI = miFormulario.children [1].value;
-   let emailI = miFormulario.children [3].value;
-   let passwordI = miFormulario.children [5].value;
+   let nombreI = miFormulario.children [1];
+   let emailI = miFormulario.children [3];
+   let passwordI = miFormulario.children [5];
    
 
    let contenedor = document.getElementById ("alumnoIngresado");
@@ -32,9 +32,9 @@ class Alumno {
    nombreI = miFormulario.children[1].value;
    emailI = miFormulario.children[3].value;
    passwordI = miFormulario.children[5].value;
-   console.log(nombreI);
+/* console.log(nombreI);
    console.log(emailI);
-   console.log(passwordI);
+   console.log(passwordI); */
    }
 
 
@@ -54,10 +54,10 @@ class Alumno {
    }
    }
    }
-   console.log (miFormulario.children[1].value= "");
+/* console.log (miFormulario.children[1].value= "");
    console.log (miFormulario.children[3].value="");
    console.log (miFormulario.children[5].value="");
-   console.log (contenedor.innerHTML ="");
+   console.log (contenedor.innerHTML =""); */
    
    inputNombre.focus();
    
@@ -84,7 +84,7 @@ function datosGuardados(){
     let emailI = miFormulario.children [3].value;
     let passwordI = miFormulario.children [5].value;
     const datos = {nombre:nombreI, email:emailI, password:passwordI};
-    console.log(datos);
+/*     console.log(datos); */
     guardarDatosLS(datos)
 
 }
