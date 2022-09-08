@@ -1,13 +1,13 @@
 
 const materias = [
-{id: 1, nombre: "Matematicas", Puntos:3000},
-{id: 2, nombre: "Literatura", Puntos:1500},
-{id: 3, nombre: "Historia", Puntos:2000},
-{id: 4, nombre: "Geografia", Puntos:3000},
-{id: 5, nombre: "Fisica", Puntos:3500},
-{id: 6, nombre: "Quimica", Puntos:4000},
-{id: 7, nombre: "Educacion Fisica", Puntos:900},
-{id: 8, nombre: "Filosofia", Puntos:900}
+{id: 1, nombre: "Matematicas",Condicion: "Obligatoria", Puntos:3000},
+{id: 2, nombre: "Literatura", Condicion: "Opcional", Puntos:1500},
+{id: 3, nombre: "Historia", Condicion: "Obligatoria", Puntos:2000},
+{id: 4, nombre: "Geografia", Condicion: "Obligatoria", Puntos:3000},
+{id: 5, nombre: "Fisica", Condicion: "Obligatoria", Puntos:3500},
+{id: 6, nombre: "Quimica", Condicion: "Obligatoria", Puntos:4000},
+{id: 7, nombre: "Educacion Fisica", Condicion: "Opcional", Puntos:900},
+{id: 8, nombre: "Filosofia", Condicion: "Opcional", Puntos:900}
 ];
 
 function guardadoDeMateriasLS(materias){
@@ -17,7 +17,49 @@ function cargarMateriasLS (){
     return JSON.parse(localStorage.getItem ("materias")) || [];
 }
 
- class course{
+function guardadoDeMateriasCarrito(materias){
+    localStorage.setItem ("materias_seleccionadas", JSON.stringify(materias));
+}
+function cargarMateriasCarrito (){
+    return JSON.parse(localStorage.getItem ("materias_seleccionadas")) || [];
+}
+
+function buscarMateria (id){
+    const materias = cargarMateriasLS();
+    return materias.find (item => item.id === id);
+}
+
+function agregarMateria(id){
+    const materias_seleccionadas = cargarMateriasCarrito();
+    const materia = buscarMateria(id);
+    materias_seleccionadas.push(materia);
+    guardadoDeMateriasCarrito(materias_seleccionadas);
+}
+
+function renderMaterias (){
+    const materias = cargarMateriasLS();
+    let contenido = "";
+    materias.forEach(materia => {
+        contenido += `<div class="col-md-3">
+        <div class="card" style="width: 18rem;>
+        <div class="card-body">
+          <h5 class="card-title">Nombre de la Materia: ${materia.nombre}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Condicion: ${materia.Condicion}</h6>
+          <p class="card-text">Puntos: ${materia.Puntos}</p>
+          <a href="#" class="btn btn-primary" onclick="agregarMateria()${materia.id}">Agregar (+)</a>
+        </div>
+        </div>
+        </div>`
+        document.getElementById("materias").innerHTML = contenido;
+    });
+}
+
+renderMaterias();
+guardadoDeMateriasLS(materias);
+
+
+
+/*  class course{
     constructor(objeto) {
     this.id = objeto.id;
     this.nombre = objeto.nombre;
@@ -105,3 +147,4 @@ alert (salida);
 
 agregarMaterias();
 mostrarMateriasCarrito(); 
+ */

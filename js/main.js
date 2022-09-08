@@ -1,7 +1,7 @@
-window.addEventListener ('load', () => {
+/* window.addEventListener ('load', () => {
     let mapaMaterias = document.getElementById("course");
     console.log (mapaMaterias); })
-/* let nameCourse = prompt ("Ingrese el nombre de la carrera que esta cursando: ") */
+ let nameCourse = prompt ("Ingrese el nombre de la carrera que esta cursando: ") 
 let carrera = document.getElementById ("Carrera")
  carrera.innerHTML = "Carrera: " + nameCourse;
 
@@ -13,7 +13,7 @@ let carrera = document.getElementById ("Carrera")
  let mapaMaterias = document.getElementById("course");
 
 mapaMaterias.innerHTML = map.join("");
-
+*/
 
 
 
