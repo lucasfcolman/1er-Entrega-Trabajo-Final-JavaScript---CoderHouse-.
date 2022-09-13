@@ -31,120 +31,49 @@ function buscarMateria (id){
 
 function agregarMateria(id){
     const materias_seleccionadas = cargarMateriasCarrito();
-    const materia = buscarMateria(id);
-    materias_seleccionadas.push(materia);
+    let pos = materias_seleccionadas.findIndex(item => item.id === id);
+    
+    if (pos < -1){
+        materias_seleccionadas[pos].cantidad += 1;
+    }else {
+        const materias = buscarMateria(id);
+        materias.cantidad = 1;
+        materias_seleccionadas.push(materias);
+    }
     guardadoDeMateriasCarrito(materias_seleccionadas);
+    actualizarBotonSeleccionados();
 }
 
-function renderMaterias (){
-    const materias = cargarMateriasLS();
-    let contenido = "";
-    materias.forEach(materia => {
-        contenido += `<div class="col-md-3">
-        <div class="card" style="width: 18rem;>
-        <div class="card-body">
-          <h5 class="card-title">Nombre de la Materia: ${materia.nombre}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Condicion: ${materia.Condicion}</h6>
-          <p class="card-text">Puntos: ${materia.Puntos}</p>
-          <a href="#" class="btn btn-primary" onclick="agregarMateria()${materia.id}">Agregar (+)</a>
-        </div>
-        </div>
-        </div>`
-        document.getElementById("materias").innerHTML = contenido;
-    });
+function eliminarMateria(id){
+    const materias_seleccionadas = cargarMateriasCarrito();
+    let pos = materias_seleccionadas.findIndex(item => item.id === id);
+    materias_seleccionadas[pos].cantidad -= 1;
+    if(materias_seleccionadas[pos].cantidad == 0){
+        materias_seleccionadas.splice(pos, 1);
+    }
+    guardadoDeMateriasCarrito(materias_seleccionadas);
+    actualizarBotonSeleccionados();
+    renderMateriasCarrito
 }
 
-renderMaterias();
+
+function actualizarBotonSeleccionados(){
+    let contenido = `<button type="button" class="btn btn-warning position-relative">
+    Seleccionadas
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+     (${totalMaterias()}) 
+    </span>
+  </button>`
+  document.getElementById("boton-carrito").innerHTML = contenido;
+}
+
+function totalMaterias(){
+    const materias_seleccionadas = cargarMateriasCarrito();
+    return materias_seleccionadas.reduce((acumulador, item) => acumulador + item.cantidad, 0);
+}
+function totalPuntos(){
+    const materias_seleccionadas = cargarMateriasCarrito();
+    return materias_seleccionadas.reduce((acumulador, item) => acumulador + (item.cantidad*item.Puntos), 0);
+}
+
 guardadoDeMateriasLS(materias);
-
-
-
-/*  class course{
-    constructor(objeto) {
-    this.id = objeto.id;
-    this.nombre = objeto.nombre;
-    this.Puntos = objeto.Puntos;
-    this.asistencia = 10;
-    this.descuentoxasis= 100;
-    }
-extraporAsistencia(){
-        this.Puntos = this.Puntos + ((this.Puntos * this.asistencia)/10);
-    }
-    restaXasistencia (){
-        if (carrito.length > 2){
-            this.Puntos = this.Puntos - ((this.Puntos * this.descuentoxasis)/10);
-        }
-    
-    }
-}
-
-const carrito =  []
-
-
-
-
-
-
-function materiaAgregar (materia){
-    carrito.push (materia);
-    console.log ("Materia Agregada");
-    console.log (carrito);
-}
-
-
-
-function eliminarMaterias(id){
-let pos = carrito.indexOf ((elemento) => elemento.id == id);
-carrito.splice (pos, 1)
-}
-
-function buscarMateria (id){
-    return materias.find((elemento) => elemento.id == id);
-}
-
-
-function agregarMaterias (){
-    let salida = "Seleccione la materia por el numero correspondiente:\n\n";
-    
-    for (let materia of materias){
-        salida += materia.id + " - " + materia.nombre + " " + materia.Puntos + "\n" ;
-    }
-
-     let id_materia = 0;
-
-    while (id_materia != null) {
-        let id_materia = prompt (salida);
-
-        if (id_materia != null){
-            id_materia = parseInt (id_materia);
-
-        }   else{
-            break;
-        }
-        console.log (id_materia);
-        let materia = buscarMateria (id_materia);
-        console.log (materia);
-        materiaAgregar (materia);
-    } 
-}
-
-function mostrarMateriasCarrito (){
-    let salida = "Materias seleccionadas:\n\n";
-    let total_puntos = 0;
-
-
-    for (let materia_carrito of carrito){
-        let materia = new course (materia_carrito);
-        materia.extraporAsistencia();
-        materia.restaXasistencia();
-        total_puntos += materia.Puntos;
-        salida += materia.id + " - " + materia.nombre + materia.Puntos + "\n" ;
-}
-salida += "Puntos Totales: " + total_puntos;
-alert (salida);
-
-}
-
-agregarMaterias();
-mostrarMateriasCarrito(); 
- */
